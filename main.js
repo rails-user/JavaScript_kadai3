@@ -54,6 +54,11 @@ function displayTodos () {
 		const deleteBtn = document.createElement('input');
 		deleteBtn.type = 'button';
 		deleteBtn.value = '削除';
+		deleteBtn.addEventListener('click', () => {
+			todos.splice(i,1);
+			//タスク一覧を表示	
+			displayTodos();
+		});
 		td3.appendChild(deleteBtn);
 		tr.appendChild(td3);
 	}
