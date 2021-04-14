@@ -19,12 +19,12 @@ document.getElementById('insertBtn').onclick = function () {
 
 }
 
-function displayTodos () {
+function displayTodos() {
 
 	const table = document.getElementById("table0");
 	table.innerHTML = "";
 
-	for (let i = 0 ; i < todos.length ; i++){
+	for (let i = 0; i < todos.length; i++) {
 
 		//tr要素の追加
 		const tr = document.createElement('tr');
@@ -46,6 +46,16 @@ function displayTodos () {
 		const stateBtn = document.createElement('input');
 		stateBtn.type = 'button';
 		stateBtn.value = `${todos[i].status}`;
+		stateBtn.addEventListener('click', () => {
+			if (todos[i].status === '作業中') {
+				todos[i].status = '完了';
+			}
+			else {
+				todos[i].status = '作業中';
+			}
+			//タスク一覧を表示	
+			displayTodos();
+		});
 		td2.appendChild(stateBtn);
 		tr.appendChild(td2);
 
@@ -55,7 +65,7 @@ function displayTodos () {
 		deleteBtn.type = 'button';
 		deleteBtn.value = '削除';
 		deleteBtn.addEventListener('click', () => {
-			todos.splice(i,1);
+			todos.splice(i, 1);
 			//タスク一覧を表示	
 			displayTodos();
 		});
