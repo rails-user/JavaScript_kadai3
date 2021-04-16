@@ -19,12 +19,28 @@ document.getElementById('insertBtn').onclick = function () {
 
 }
 
+//ラジオボタン選択時のイベントリスナー
+document.getElementsByName('radioBtn').forEach(
+	radioBtn => radioBtn.addEventListener('change', () => {
+		//タスク一覧を表示	
+		displayTodos();
+	})
+);
+
+//タスク一覧への出力処理
 function displayTodos() {
 
 	const table = document.getElementById("table0");
 	table.innerHTML = "";
-
+	//配列todosに格納されたオブジェクト等をDOM操作で出力する。
 	for (let i = 0; i < todos.length; i++) {
+
+		//選択したラジオボタンの「状態」と、配列の状態ステータスが一致しない場合、
+		//タスク一覧への出力せずスキップする
+		if ((document.getElementById('working').checked && todos[i].status === '完了') ||
+			(document.getElementById('finished').checked && todos[i].status === '作業中')) {
+			continue;
+		}
 
 		//tr要素の追加
 		const tr = document.createElement('tr');
